@@ -6,26 +6,21 @@ using namespace std;
 
 int q[SIZE], front = -1, rear = -1;
 
-// Insert element
 void enqueue(int x) {
     if ((rear + 1) % SIZE == front) {
-        cout << "Queue Full!\n";
+        cout << "Queue Full\n";
         return;
     }
 
-    if (front == -1)
-        front = 0;
+    if (front == -1) front = 0;
 
     rear = (rear + 1) % SIZE;
     q[rear] = x;
-
-    cout << "Inserted!\n";
 }
 
-// Delete element
 void dequeue() {
     if (front == -1) {
-        cout << "Queue Empty!\n";
+        cout << "Queue Empty\n";
         return;
     }
 
@@ -37,18 +32,15 @@ void dequeue() {
         front = (front + 1) % SIZE;
 }
 
-// Display elements
 void display() {
     if (front == -1) {
-        cout << "Queue Empty!\n";
+        cout << "Queue Empty\n";
         return;
     }
 
-    int i = front;
-    while (true) {
+    for (int i = front; ; i = (i + 1) % SIZE) {
         cout << q[i] << " ";
         if (i == rear) break;
-        i = (i + 1) % SIZE;
     }
     cout << endl;
 }
@@ -57,26 +49,18 @@ int main() {
     int ch, x;
 
     do {
-        cout << "\n1.Enqueue  2.Dequeue";
-        cout << "\n3.Display  0.Exit";
-        cout << "\nEnter choice: ";
+        cout << "\n1.Enqueue  2.Dequeue  3.Display  0.Exit\n";
         cin >> ch;
 
         switch (ch) {
             case 1:
-                cout << "Enter value: ";
                 cin >> x;
                 enqueue(x);
                 break;
-
-            case 2:
-                dequeue();
-                break;
-
-            case 3:
-                display();
-                break;
+            case 2: dequeue(); break;
+            case 3: display(); break;
         }
+
     } while (ch != 0);
 
     return 0;
